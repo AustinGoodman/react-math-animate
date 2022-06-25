@@ -1,0 +1,38 @@
+{
+  "name": "goodman-react-preset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --config webpack.config.js",
+    "build": "webpack --mode development",
+    "buildhot": "webpack --watch --mode development",
+    "buildproduction": "webpack --mode production",
+    "buildhotproduction": "webpack --watch --mode production"
+  },
+  "author": "Austin Goodman",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-macros": "^3.1.0",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  }
+}
