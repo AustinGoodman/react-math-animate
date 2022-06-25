@@ -1,59 +1,49 @@
-import React, { useEffect } from 'react'
 import "../reset.css"
-import ContextProvider from './ContextProvider'
+import React, { useEffect, useRef, useState } from 'react'
+import AMath from "./AMath"
 
 export default function App() {
+	//use these math strings to see all math symbols transition in from nothing
+	const simpleTransitionStrings = [
+		String.raw`z(x + y)`,
+		String.raw`zx + zy`
+	]
 
-	//test server connection
+	//use these math strings to see some math symbols transition to a new line from the previous line
+	const complexTransitionStrings = [
+		String.raw`\props{toid: "z"}{z}(x+y)`,
+		String.raw`\props{fromid: "z"}{z}x+\props{fromid: "z"}{z}y`
+	]
+
+	//change this to see the difference between the simple transition and the complex transition
+	const mathStringsToUse = complexTransitionStrings
+
+	//stateful variable holding the currently active math string
+	const [math, setMath] = useState(mathStringsToUse[0])
+
+	//click anywhere to start the transition 
+	//YOU MUST WAIT A MOMENT FOR THE INITIAL TRANSITION TO FINISH (fix for this is on the backburner)
 	useEffect(() => {
-		async function fetchGet() {
-			const getResponse = await fetch("/api/test", {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
-
-			if (!getResponse) {
-				console.error("failed to get from server")
-			}
-
-			if (getResponse.ok) {
-				console.log(await getResponse.text())
-				console.log(getResponse)
-			}
-		}
-
-		async function fetchPost() {
-			const postResponse = await fetch("/api/test", {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(
-					{
-						postMessage: "testing post",
-					}
-				)
-			})
-
-			if (!postResponse) {
-				console.error("failed to post to server")
-			}
-
-			if (postResponse.ok) {
-				console.log(await postResponse.text())
-				console.log(postResponse)
-			}
-		}
-
-		fetchGet()
-		fetchPost()
+		window.addEventListener("click", e => {
+			setMath(mathStringsToUse[1])
+		})
 	}, [])
 
 	return (
-		<ContextProvider>
-			<h1>React Template</h1>
-		</ContextProvider>
+		<div
+			style={{
+				position: "fixed", 
+				width: "100%", height: "100%",
+				padding: "32px",
+				background: "#202020"
+			}}
+		>
+
+			<AMath
+				math={math}
+			/>
+
+		</div>
 	)
 }
+

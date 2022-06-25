@@ -10,7 +10,7 @@ module.exports = {
 	entry: "./src/index.js",
 	mode: "development",
 	output: {
-		path: path.resolve(__dirname, '../server/dist')
+		path: path.resolve(__dirname, '../dist')
 	},
 	module: {
 		rules: [
@@ -35,19 +35,15 @@ module.exports = {
 						}
 					},
 				],
+			},
+			{
+				test: /\.(pegjs)$/i,
+				use: 'raw-loader',
 			}
 		]
 	},
 	devServer: {
-		open: true,
-		historyApiFallback: true,
-		proxy: {
-			'/api': {
-				target: 'http://localhost:3000',
-				pathRewrite: { '^/': '' },
-				secure: false,
-			},
-		}
+		open: true
 	},
 	plugins: [htmlPlugin]
 }
